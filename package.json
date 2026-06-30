@@ -6,10 +6,30 @@
   "bin": {
     "zerowait": "./bin/zerowait.js"
   },
-  "files": ["bin", "templates"],
+  "author": "Alassane Charaf-dine (Dxne-Labs)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dxne-Dev/zerowait.git"
+  },
+  "homepage": "https://github.com/Dxne-Dev/zerowait#readme",
+  "bugs": {
+    "url": "https://github.com/Dxne-Dev/zerowait/issues"
+  },
+  "files": [
+    "bin",
+    "templates"
+  ],
   "engines": {
     "node": ">=16"
   },
   "license": "MIT",
-  "keywords": ["cli", "scaffolding", "bun", "offline", "retry", "afrique", "connexion-instable"]
+  "keywords": [
+    "cli",
+    "scaffolding",
+    "bun",
+    "offline",
+    "retry",
+    "afrique",
+    "connexion-instable"
+  ]
 }
