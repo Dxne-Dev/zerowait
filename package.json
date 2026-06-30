@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "description": "L'install qui survit aux coupures de connexion. CLI de scaffolding resilient pour devs en connexion instable (MTN, Waave, etc).",
   "type": "commonjs",
-  "bin": {
-    "zerowait": "./bin/zerowait.js"
-  },
+  "bin": "./bin/zerowait.js",
   "files": ["bin", "templates"],
   "engines": {
     "node": ">=16"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<ton-compte>/zerowait.git"
+  },
+  "homepage": "https://github.com/<ton-compte>/zerowait#readme",
+  "bugs": "https://github.com/<ton-compte>/zerowait/issues",
+  "author": "Dxne-Labs",
   "keywords": ["cli", "scaffolding", "bun", "offline", "retry", "afrique", "connexion-instable"]
 }
