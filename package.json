@@ -1,6 +1,6 @@
 {
   "name": "zerowait",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "L'install qui survit aux coupures de connexion. CLI de scaffolding resilient pour devs en connexion instable (MTN, Waave, etc).",
   "type": "commonjs",
   "bin": {
