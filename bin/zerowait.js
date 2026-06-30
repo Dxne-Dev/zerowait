@@ -145,6 +145,16 @@ async function resilientInstall(cwd, useBun) {
   return false;
 }
 
+function countInstalledFiles(cwd) {
+  try {
+    const nodeModules = path.join(cwd, "node_modules");
+    if (!fs.existsSync(nodeModules)) return 0;
+    return fs.readdirSync(nodeModules).length;
+  } catch {
+    return -1; // dossier en cours d'ecriture, lecture impossible a cet instant precis
+  }
+}
+
 function runInstallOnce(cmd, args, cwd) {
   return new Promise((resolve) => {
     // Sur Windows, shell:true + tableau d'arguments declenche un warning Node
@@ -158,13 +168,19 @@ function runInstallOnce(cmd, args, cwd) {
 
     let lastLine = "";
     let settled = false;
+    let lastCount = countInstalledFiles(cwd);
 
-    // npm/bun ne donnent pas toujours un pourcentage exploitable,
-    // donc on affiche au minimum un signe de vie regulier pour eviter
-    // que l'utilisateur ne pense que c'est fige et n'annule (Ctrl+C).
+    // npm reste souvent silencieux une fois les warnings initiaux passes
+    // (rien n'est imprime avant le resume final). On ne peut donc pas se fier
+    // uniquement au texte de sortie pour prouver que ca avance : on observe
+    // aussi la croissance reelle de node_modules en parallele.
     const heartbeat = setInterval(() => {
+      const count = countInstalledFiles(cwd);
+      const growing = count > lastCount;
+      lastCount = count >= 0 ? count : lastCount;
       clearLine();
-      process.stdout.write(`  ... toujours en cours (${lastLine.slice(0, 60)})`);
+      const status = growing ? `${count} paquets ecrits, ca avance` : "verification en cours";
+      process.stdout.write(`  ... toujours en cours (${status})`);
     }, 5000);
 
     const onData = (data) => {
